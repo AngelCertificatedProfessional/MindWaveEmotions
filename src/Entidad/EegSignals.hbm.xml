@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 16, 2016 9:23:31 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entidad.EegSignals" table="eeg_signals" catalog="eeg" optimistic-lock="version">
+        <id name="idEegSignals" type="int">
+            <column name="idEeg_Signals" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombrePersona" type="string">
+            <column name="nombrePersona" length="90" not-null="true" />
+        </property>
+        <property name="delta" type="int">
+            <column name="delta" not-null="true" />
+        </property>
+        <property name="theta" type="int">
+            <column name="theta" not-null="true" />
+        </property>
+        <property name="lowAlpha" type="int">
+            <column name="lowAlpha" not-null="true" />
+        </property>
+        <property name="highAlpha" type="int">
+            <column name="highAlpha" not-null="true" />
+        </property>
+        <property name="lowBeta" type="int">
+            <column name="lowBeta" not-null="true" />
+        </property>
+        <property name="highBeta" type="int">
+            <column name="highBeta" not-null="true" />
+        </property>
+        <property name="lowGamma" type="int">
+            <column name="lowGamma" not-null="true" />
+        </property>
+        <property name="highGamma" type="int">
+            <column name="highGamma" not-null="true" />
+        </property>
+        <property name="lado" type="string">
+            <column name="lado" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

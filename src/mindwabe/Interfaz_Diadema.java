@@ -5,26 +5,35 @@
  */
 package mindwabe;
 
+import Control.EegControl;
+import Entidad.EegSignals;
+import java.awt.List;
 import java.awt.TrayIcon;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import mindwabe.Cliente.ClienteTCP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  *
- * @author LiutsCertificatedProfessional
- * Utilizando el parte del codigo de ericblue
+ * @author LiutsCertificatedProfessional Utilizando el parte del codigo de
+ * ericblue
  */
 public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Interfaz_Diadema
      */
-    ClienteTCP clienteTCP;
+    private ClienteTCP clienteTCP;
+    private String personaAEvaluar;
 
     public Interfaz_Diadema() {
+        personaAEvaluar = JOptionPane.showInputDialog("Escriba su nombre");
         initComponents();
     }
 
@@ -37,62 +46,119 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        deltaLbl = new javax.swing.JLabel();
+        thetaLbl = new javax.swing.JLabel();
+        lowAlphaLbl = new javax.swing.JLabel();
+        highAlphaLbl = new javax.swing.JLabel();
+        lowBetaLbl = new javax.swing.JLabel();
+        highBetaLbl = new javax.swing.JLabel();
+        lowGammaLbl = new javax.swing.JLabel();
+        highGammaLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        relajacionLbl = new javax.swing.JLabel();
-        guineoLbl = new javax.swing.JLabel();
-        concentracionLbl = new javax.swing.JLabel();
         estadoLbl = new javax.swing.JLabel();
-        senalLbl = new javax.swing.JLabel();
+        concentracionLbl = new javax.swing.JLabel();
+        relajacionLbl = new javax.swing.JLabel();
+        ladoLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        deltaLbl.setText("Delta: ");
+
+        thetaLbl.setText("Theta:");
+
+        lowAlphaLbl.setText("LowAlpha:");
+
+        highAlphaLbl.setText("High Alpha: ");
+
+        lowBetaLbl.setText("Low Beta:");
+
+        highBetaLbl.setText("High Beta:");
+
+        lowGammaLbl.setText("Low Gamma:");
+
+        highGammaLbl.setText("High Gamma:");
+
         jLabel1.setText("Datos Enviados por la MindWave: ");
-
-        relajacionLbl.setText("Relajacion:");
-
-        guineoLbl.setText("Guineo:");
-
-        concentracionLbl.setText("Concentracion: ");
 
         estadoLbl.setText("Estado: ");
 
-        senalLbl.setText("Senal: ");
+        concentracionLbl.setText("Concentracion: ");
+
+        relajacionLbl.setText("Relajacion:");
+
+        ladoLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        ladoLbl.setText("Piensa en el lado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(relajacionLbl)
-                            .addComponent(guineoLbl)
-                            .addComponent(concentracionLbl)
-                            .addComponent(estadoLbl)
-                            .addComponent(senalLbl)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(603, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(relajacionLbl)
+                                    .addComponent(concentracionLbl))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(highGammaLbl)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lowBetaLbl)
+                                        .addComponent(highBetaLbl))
+                                    .addComponent(lowGammaLbl))
+                                .addGap(116, 116, 116)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(highAlphaLbl)
+                                    .addComponent(lowAlphaLbl)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(deltaLbl)
+                                            .addComponent(thetaLbl)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ladoLbl)
+                                    .addComponent(estadoLbl))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
+                .addGap(26, 26, 26)
                 .addComponent(estadoLbl)
-                .addGap(33, 33, 33)
-                .addComponent(senalLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(concentracionLbl)
-                .addGap(35, 35, 35)
-                .addComponent(relajacionLbl)
-                .addGap(38, 38, 38)
-                .addComponent(guineoLbl)
-                .addGap(36, 36, 36))
+                .addGap(30, 30, 30)
+                .addComponent(ladoLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lowBetaLbl)
+                            .addComponent(deltaLbl))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(highBetaLbl)
+                            .addComponent(thetaLbl))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lowGammaLbl)
+                            .addComponent(lowAlphaLbl))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(highGammaLbl)
+                            .addComponent(highAlphaLbl)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(concentracionLbl)
+                        .addGap(83, 83, 83)
+                        .addComponent(relajacionLbl)))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -145,11 +211,18 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel concentracionLbl;
+    private javax.swing.JLabel deltaLbl;
     private javax.swing.JLabel estadoLbl;
-    private javax.swing.JLabel guineoLbl;
+    private javax.swing.JLabel highAlphaLbl;
+    private javax.swing.JLabel highBetaLbl;
+    private javax.swing.JLabel highGammaLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel ladoLbl;
+    private javax.swing.JLabel lowAlphaLbl;
+    private javax.swing.JLabel lowBetaLbl;
+    private javax.swing.JLabel lowGammaLbl;
     private javax.swing.JLabel relajacionLbl;
-    private javax.swing.JLabel senalLbl;
+    private javax.swing.JLabel thetaLbl;
     // End of variables declaration//GEN-END:variables
 
     public boolean crearConexion() {
@@ -164,82 +237,104 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         }
     }
 
-    public void recibirDatos() {
-        while (clienteTCP.isDataAvailable()) {
-            try {
-                if (clienteTCP.isDataAvailable()) {
-                    senalLbl.setText("Senal: " + clienteTCP.getData());
-                    try {
-                        String clientData = clienteTCP.getData();
-                        JSONObject json = new JSONObject(clientData);
-
-                        /*
-                         * JH: check just in case it's not there due
-                         * to poorSignallevel
-                         */
-                        if (!json.isNull("eegPower")) {
-                            /*
-                             * JH: check for existence of
-                             * poorSignalLevel. If not available,
-                             * assume 0 *
-                             */
-                            if (!json.isNull("poorSignalLevel")) {
-                                //writer.append(Integer.toString(json.getInt("poorSignalLevel")) + ',');
-                            } else {
-                                //writer.append("0,");
-                            }
-
-                            /*
-                             * JH: check for existence of eSense. I
-                             * noticed it's possible to get eegPower
-                             * without eSense when poorSignallevel
-                             * >0
-                             */
-                            if (!json.isNull("eSense")) {
-
-                                JSONObject esense = json.getJSONObject("eSense");
-
-                                /*
-                                 * JH: Don't know if it's possible
-                                 * for these attributes to not exist
-                                 * even when the JSON Object exists
-                                 */
-                                concentracionLbl.setText(Integer.toString(esense.getInt("attention")) + ',');
-                                relajacionLbl.setText(Integer.toString(esense.getInt("meditation")) + ',');
-
-                            } else {
-                                //logger.debug("$SwingWorker<Void,Void>.doInBackground() - eSense is null!");
-                            }
-
-                            JSONObject eegPower = json.getJSONObject("eegPower");
-                                /*
-                            writer.append(Integer.toString(eegPower.getInt("delta")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("theta")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("lowAlpha")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("highAlpha")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("lowBeta")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("highBeta")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("lowGamma")) + ',');
-                            writer.append(Integer.toString(eegPower.getInt("highGamma")));
-                            writer.append(newLine);
-                                        */
-                        } else {
-                        }
-
-                    } catch (JSONException e1) {
-                        System.out.println(e1);
+    public void recibirDatos() throws InterruptedException {
+        ArrayList<EegSignals> listaEeg = new ArrayList<EegSignals>();
+        EegControl eegControl = new EegControl();
+        int contador = 0;
+        int contadorFinal = 0;
+        String lado = "derecho";
+        ladoLbl.setText("Piensa en mover la laptop al lado: "+lado + "en 3:");
+        Thread.sleep(500);
+        ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + "en 2:");
+        Thread.sleep(500);
+        ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + "en 1:");
+        Thread.sleep(500);
+        try {
+            while (clienteTCP.isDataAvailable()) {
+                ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + " Ya:");
+                EegSignals eeg = new EegSignals();
+                String clientData = clienteTCP.getData();
+                JSONObject json = new JSONObject(clientData);
+                if (!json.isNull("eegPower")) {
+                    if (!json.isNull("eSense")) {
+                        JSONObject esense = json.getJSONObject("eSense");
+                        concentracionLbl.setText("Concentracion: " + Integer.toString(esense.getInt("attention")));
+                        relajacionLbl.setText("Meditacion: " + Integer.toString(esense.getInt("meditation")));
+                    } else {
+                        System.out.println("No entro");
                     }
-                } else if (clienteTCP.isConnected() == false) {
-                    crearConexion();
-                }
-            } catch (Exception e) {
-                crearConexion();
-            }
-        }
+                    if (!json.isNull("eegPower")) {
+                        JSONObject eegPower = json.getJSONObject("eegPower");
 
+                        deltaLbl.setText("Delta: " + Integer.toString(eegPower.getInt("delta")));
+                        thetaLbl.setText("Theta: " + Integer.toString(eegPower.getInt("theta")));
+                        lowAlphaLbl.setText("LowAlpha: " + Integer.toString(eegPower.getInt("lowAlpha")));
+                        highAlphaLbl.setText("High Alpha: " + Integer.toString(eegPower.getInt("highAlpha")));
+                        lowBetaLbl.setText("Low Beta: " + Integer.toString(eegPower.getInt("lowBeta")));
+                        highBetaLbl.setText("High Beta: " + Integer.toString(eegPower.getInt("highBeta")));
+                        lowGammaLbl.setText("Low Gamma: " + Integer.toString(eegPower.getInt("lowGamma")));
+                        highGammaLbl.setText("High Gamma: " + Integer.toString(eegPower.getInt("highGamma")));
+
+                        eeg.setNombrePersona(personaAEvaluar);
+                        eeg.setDelta(eegPower.getInt("delta"));
+                        eeg.setTheta(eegPower.getInt("theta"));
+                        eeg.setLowAlpha(eegPower.getInt("lowAlpha"));
+                        eeg.setHighAlpha(eegPower.getInt("highAlpha"));
+                        eeg.setLowBeta(eegPower.getInt("lowBeta"));
+                        eeg.setHighBeta(eegPower.getInt("highBeta"));
+                        eeg.setLowGamma(eegPower.getInt("lowGamma"));
+                        eeg.setHighGamma(eegPower.getInt("highGamma"));
+                        eeg.setLado(lado);
+                        listaEeg.add(eeg);
+                        contador++;
+                        if (contador == 15) {
+                            eegControl.Registrar(listaEeg);
+                            contador = 0;
+                            if (lado.equals("derecho")) {
+                                lado = "izquierdo";
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 3:");
+                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 2:");
+                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 1:");
+                                Thread.sleep(500);
+                            } else {
+                                lado = "derecho";
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 3:");
+                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 2:");
+                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover la laptop al lado: "
+                                        + lado + "en 1:");
+                                Thread.sleep(500);
+                            }
+                        }
+                        if (contadorFinal == 20) {
+                            JOptionPane.showMessageDialog(this, "Gracias por tu ayuda, contigo haremos un futuro mejor");
+                            this.dispose();
+                        }
+                    } else {
+                        System.out.println("No entro");
+                    }
+                } else {
+                    System.out.println("No entro");
+                }
+            }
+        } catch (JSONException e1) {
+            System.out.println(e1);
+        }
     }
 
     public void run() {
-        recibirDatos();
+        try {
+            recibirDatos();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Interfaz_Diadema.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
