@@ -59,6 +59,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         concentracionLbl = new javax.swing.JLabel();
         relajacionLbl = new javax.swing.JLabel();
         ladoLbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,9 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         ladoLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ladoLbl.setText("Piensa en el lado:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 80)); // NOI18N
+        jLabel2.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,8 +107,11 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(relajacionLbl)
-                                    .addComponent(concentracionLbl))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                                    .addComponent(concentracionLbl)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(110, 110, 110)
+                                        .addComponent(jLabel2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(highGammaLbl)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -136,9 +143,10 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                 .addComponent(estadoLbl)
                 .addGap(30, 30, 30)
                 .addComponent(ladoLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lowBetaLbl)
                             .addComponent(deltaLbl))
@@ -154,7 +162,9 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(highGammaLbl)
                             .addComponent(highAlphaLbl)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(concentracionLbl)
                         .addGap(83, 83, 83)
                         .addComponent(relajacionLbl)))
@@ -217,6 +227,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel highBetaLbl;
     private javax.swing.JLabel highGammaLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel ladoLbl;
     private javax.swing.JLabel lowAlphaLbl;
     private javax.swing.JLabel lowBetaLbl;
@@ -243,12 +254,12 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         int contador = 0;
         int contadorFinal = 0;
         String lado = "derecho";
-        ladoLbl.setText("Piensa en mover la laptop al lado: "+lado + "en 3:");
-        Thread.sleep(500);
-        ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + "en 2:");
-        Thread.sleep(500);
-        ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + "en 1:");
-        Thread.sleep(500);
+        ladoLbl.setText("Piensa en mover el punto al lado: "+lado + "en 3");
+        Thread.sleep(3000);
+        ladoLbl.setText("Piensa en mover el punto al lado: "+ lado + "en 2");
+        Thread.sleep(1500);
+        ladoLbl.setText("Piensa en mover el punto al lado: "+ lado + "en 1");
+        Thread.sleep(1500);
         try {
             while (clienteTCP.isDataAvailable()) {
                 ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + " Ya:");
@@ -292,26 +303,26 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             contador = 0;
                             if (lado.equals("derecho")) {
                                 lado = "izquierdo";
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 3:");
-                                Thread.sleep(500);
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 2:");
-                                Thread.sleep(500);
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 1:");
-                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 3");
+                                Thread.sleep(3000);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 2");
+                                Thread.sleep(1500);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 1");
+                                Thread.sleep(1500);
                             } else {
                                 lado = "derecho";
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 3:");
-                                Thread.sleep(500);
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 2:");
-                                Thread.sleep(500);
-                                ladoLbl.setText("Piensa en mover la laptop al lado: "
-                                        + lado + "en 1:");
-                                Thread.sleep(500);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 3");
+                                Thread.sleep(3000);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 2");
+                                Thread.sleep(1500);
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + "en 1");
+                                Thread.sleep(1500);
                             }
                         }
                         if (contadorFinal == 20) {
