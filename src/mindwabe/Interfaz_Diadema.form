@@ -62,10 +62,7 @@
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ladoLbl" min="-2" max="-2" attributes="0"/>
-                                  <Component id="estadoLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="ladoLbl" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -80,9 +77,7 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="estadoLbl" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
               <Component id="ladoLbl" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -165,11 +160,6 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Datos Enviados por la MindWave: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="estadoLbl">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Estado: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="concentracionLbl">

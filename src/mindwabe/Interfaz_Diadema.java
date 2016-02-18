@@ -35,6 +35,8 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     public Interfaz_Diadema() {
         personaAEvaluar = JOptionPane.showInputDialog("Escriba su nombre");
         initComponents();
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -55,7 +57,6 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         lowGammaLbl = new javax.swing.JLabel();
         highGammaLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        estadoLbl = new javax.swing.JLabel();
         concentracionLbl = new javax.swing.JLabel();
         relajacionLbl = new javax.swing.JLabel();
         ladoLbl = new javax.swing.JLabel();
@@ -80,8 +81,6 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         highGammaLbl.setText("High Gamma:");
 
         jLabel1.setText("Datos Enviados por la MindWave: ");
-
-        estadoLbl.setText("Estado: ");
 
         concentracionLbl.setText("Concentracion: ");
 
@@ -128,9 +127,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                                             .addComponent(deltaLbl)
                                             .addComponent(thetaLbl)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ladoLbl)
-                                    .addComponent(estadoLbl))
+                                .addComponent(ladoLbl)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(103, 103, 103))
         );
@@ -139,9 +136,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(estadoLbl)
-                .addGap(30, 30, 30)
+                .addGap(72, 72, 72)
                 .addComponent(ladoLbl)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -204,16 +199,15 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                boolean condicion = false;
                 Interfaz_Diadema interfaz = new Interfaz_Diadema();
-                interfaz.setVisible(true);
+                boolean condicion = false;
                 while (!condicion) {
                     condicion = interfaz.crearConexion();
                 }
+                interfaz.setVisible(true);
                 if (condicion == true) {
                     (new Thread(interfaz)).start();
                 }
-
             }
         });
 
@@ -222,7 +216,6 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel concentracionLbl;
     private javax.swing.JLabel deltaLbl;
-    private javax.swing.JLabel estadoLbl;
     private javax.swing.JLabel highAlphaLbl;
     private javax.swing.JLabel highBetaLbl;
     private javax.swing.JLabel highGammaLbl;
@@ -240,10 +233,8 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         clienteTCP = new ClienteTCP();
         clienteTCP.connect();
         if (clienteTCP.isConnected() == true) {
-            estadoLbl.setText("Estado: Conectado");
             return true;
         } else {
-            estadoLbl.setText("Estado: Desonectado");
             return false;
         }
     }
@@ -254,11 +245,11 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         int contador = 0;
         int contadorFinal = 0;
         String lado = "derecho";
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 3");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 3");
         Thread.sleep(3000);
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 2");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 2");
         Thread.sleep(1500);
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 1");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 1");
         Thread.sleep(1500);
         try {
             while (clienteTCP.isDataAvailable()) {
@@ -309,14 +300,14 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             }
                             puntoEsperaLbl.setText("Espera!!!!");
                             ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + "en 3");
+                                    + lado + " en 3");
                             Thread.sleep(3000);
                             puntoEsperaLbl.setText(".");
                             ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + "en 2");
+                                    + lado + " en 2");
                             Thread.sleep(1500);
                             ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + "en 1");
+                                    + lado + " en 1");
                             Thread.sleep(1500);
                         }
                         if (contadorFinal == 20) {
