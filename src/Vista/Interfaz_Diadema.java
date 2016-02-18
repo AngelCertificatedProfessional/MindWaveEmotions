@@ -104,13 +104,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(relajacionLbl)
-                                    .addComponent(concentracionLbl)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(puntoEsperaLbl)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(highGammaLbl)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,9 +121,19 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                                             .addComponent(deltaLbl)
                                             .addComponent(thetaLbl)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ladoLbl)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ladoLbl)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(164, 164, 164)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(relajacionLbl)
+                                            .addComponent(concentracionLbl))))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(103, 103, 103))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(492, 492, 492)
+                .addComponent(puntoEsperaLbl)
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +142,9 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 122, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addComponent(puntoEsperaLbl)
+                        .addGap(130, 130, 130)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lowBetaLbl)
                             .addComponent(deltaLbl))
@@ -153,16 +159,14 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(highGammaLbl)
-                            .addComponent(highAlphaLbl)))
+                            .addComponent(highAlphaLbl)
+                            .addComponent(relajacionLbl)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(ladoLbl)
-                        .addGap(18, 18, 18)
-                        .addComponent(puntoEsperaLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(concentracionLbl)
-                        .addGap(83, 83, 83)
-                        .addComponent(relajacionLbl)))
+                        .addGap(106, 106, 106)))
                 .addGap(40, 40, 40))
         );
 
@@ -257,6 +261,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         }
         try {
             while (clienteTCP.isDataAvailable()) {
+
                 ladoLbl.setText("Piensa en mover la laptop al lado: " + lado + " Ya:");
                 EegSignals eeg = new EegSignals();
                 String clientData = clienteTCP.getData();
@@ -298,20 +303,23 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             contador = 0;
                             contadorFinal++;
                             listaEeg = null;
+                            listaEeg = new ArrayList<EegSignals>();
                             if (lado.equals("derecho")) {
                                 lado = "izquierdo";
                             } else {
                                 lado = "derecho";
                             }
-                            for (int k = 10; k > 0; k--) {
-                                if (k > 4) {
-                                    puntoEsperaLbl.setText("Espera!!!!");
-                                } else {
-                                    puntoEsperaLbl.setText(".");
+                            if (contadorFinal < 10) {
+                                for (int k = 10; k > 0; k--) {
+                                    if (k > 4) {
+                                        puntoEsperaLbl.setText("Espera!!!!");
+                                    } else {
+                                        puntoEsperaLbl.setText(".");
+                                    }
+                                    ladoLbl.setText("Piensa en mover el punto al lado: "
+                                            + lado + " en " + k);
+                                    Thread.sleep(1500);
                                 }
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + " en " + k);
-                                Thread.sleep(1500);
                             }
                         }
                         if (contadorFinal == 10) {
@@ -324,6 +332,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                     }
                 } else {
                     ladoLbl.setText("Espera unos minutos :)");
+                    System.out.println("No entro");
                 }
             }
         } catch (JSONException e1) {
