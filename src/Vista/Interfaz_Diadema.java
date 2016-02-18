@@ -267,68 +267,69 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                 String clientData = clienteTCP.getData();
                 JSONObject json = new JSONObject(clientData);
                 if (!json.isNull("eegPower")) {
+
+                    JSONObject eegPower = json.getJSONObject("eegPower");
+
+                    deltaLbl.setText("Delta: " + Integer.toString(eegPower.getInt("delta")));
+                    thetaLbl.setText("Theta: " + Integer.toString(eegPower.getInt("theta")));
+                    lowAlphaLbl.setText("LowAlpha: " + Integer.toString(eegPower.getInt("lowAlpha")));
+                    highAlphaLbl.setText("High Alpha: " + Integer.toString(eegPower.getInt("highAlpha")));
+                    lowBetaLbl.setText("Low Beta: " + Integer.toString(eegPower.getInt("lowBeta")));
+                    highBetaLbl.setText("High Beta: " + Integer.toString(eegPower.getInt("highBeta")));
+                    lowGammaLbl.setText("Low Gamma: " + Integer.toString(eegPower.getInt("lowGamma")));
+                    highGammaLbl.setText("High Gamma: " + Integer.toString(eegPower.getInt("highGamma")));
+
+                    eeg.setNombrePersona(personaAEvaluar);
+                    eeg.setDelta(eegPower.getInt("delta"));
+                    eeg.setTheta(eegPower.getInt("theta"));
+                    eeg.setLowAlpha(eegPower.getInt("lowAlpha"));
+                    eeg.setHighAlpha(eegPower.getInt("highAlpha"));
+                    eeg.setLowBeta(eegPower.getInt("lowBeta"));
+                    eeg.setHighBeta(eegPower.getInt("highBeta"));
+                    eeg.setLowGamma(eegPower.getInt("lowGamma"));
+                    eeg.setHighGamma(eegPower.getInt("highGamma"));
+                    eeg.setLado(lado);
+                    
                     if (!json.isNull("eSense")) {
                         JSONObject esense = json.getJSONObject("eSense");
                         concentracionLbl.setText("Concentracion: " + Integer.toString(esense.getInt("attention")));
                         relajacionLbl.setText("Meditacion: " + Integer.toString(esense.getInt("meditation")));
-                    } else {
-                        System.out.println("No entro");
-                    }
-                    if (!json.isNull("eegPower")) {
-                        JSONObject eegPower = json.getJSONObject("eegPower");
-
-                        deltaLbl.setText("Delta: " + Integer.toString(eegPower.getInt("delta")));
-                        thetaLbl.setText("Theta: " + Integer.toString(eegPower.getInt("theta")));
-                        lowAlphaLbl.setText("LowAlpha: " + Integer.toString(eegPower.getInt("lowAlpha")));
-                        highAlphaLbl.setText("High Alpha: " + Integer.toString(eegPower.getInt("highAlpha")));
-                        lowBetaLbl.setText("Low Beta: " + Integer.toString(eegPower.getInt("lowBeta")));
-                        highBetaLbl.setText("High Beta: " + Integer.toString(eegPower.getInt("highBeta")));
-                        lowGammaLbl.setText("Low Gamma: " + Integer.toString(eegPower.getInt("lowGamma")));
-                        highGammaLbl.setText("High Gamma: " + Integer.toString(eegPower.getInt("highGamma")));
-
-                        eeg.setNombrePersona(personaAEvaluar);
-                        eeg.setDelta(eegPower.getInt("delta"));
-                        eeg.setTheta(eegPower.getInt("theta"));
-                        eeg.setLowAlpha(eegPower.getInt("lowAlpha"));
-                        eeg.setHighAlpha(eegPower.getInt("highAlpha"));
-                        eeg.setLowBeta(eegPower.getInt("lowBeta"));
-                        eeg.setHighBeta(eegPower.getInt("highBeta"));
-                        eeg.setLowGamma(eegPower.getInt("lowGamma"));
-                        eeg.setHighGamma(eegPower.getInt("highGamma"));
-                        eeg.setLado(lado);
-                        listaEeg.add(eeg);
-                        contador++;
-                        if (contador == 15) {
-                            eegControl.Registrar(listaEeg);
-                            contador = 0;
-                            contadorFinal++;
-                            listaEeg = null;
-                            listaEeg = new ArrayList<EegSignals>();
-                            if (lado.equals("derecho")) {
-                                lado = "izquierdo";
-                            } else {
-                                lado = "derecho";
-                            }
-                            if (contadorFinal < 10) {
-                                for (int k = 10; k > 0; k--) {
-                                    if (k > 4) {
-                                        puntoEsperaLbl.setText("Espera!!!!");
-                                    } else {
-                                        puntoEsperaLbl.setText(".");
-                                    }
-                                    ladoLbl.setText("Piensa en mover el punto al lado: "
-                                            + lado + " en " + k);
-                                    Thread.sleep(1500);
-                                }
-                            }
-                        }
-                        if (contadorFinal == 10) {
-                            JOptionPane.showMessageDialog(this, "Gracias por tu ayuda, contigo haremos un futuro mejor");
-                            this.dispose();
-                            System.exit(0);
+                        if(esense.getInt("attention")>60){
+                            listaEeg.add(eeg);
+                            contador++;
+                            Thread.sleep(300);                          
                         }
                     } else {
                         ladoLbl.setText("Espera unos minutos :)");
+                    }
+                    if (contador == 15) {
+                        eegControl.Registrar(listaEeg);
+                        contador = 0;
+                        contadorFinal++;
+                        listaEeg = null;
+                        listaEeg = new ArrayList<EegSignals>();
+                        if (lado.equals("derecho")) {
+                            lado = "izquierdo";
+                        } else {
+                            lado = "derecho";
+                        }
+                        if (contadorFinal < 10) {
+                            for (int k = 10; k > 0; k--) {
+                                if (k > 4) {
+                                    puntoEsperaLbl.setText("Espera!!!!");
+                                } else {
+                                    puntoEsperaLbl.setText(".");
+                                }
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + " en " + k);
+                                Thread.sleep(1500);
+                            }
+                        }
+                    }
+                    if (contadorFinal == 10) {
+                        JOptionPane.showMessageDialog(this, "Gracias por tu ayuda, contigo haremos un futuro mejor");
+                        this.dispose();
+                        System.exit(0);
                     }
                 } else {
                     ladoLbl.setText("Espera unos minutos :)");
