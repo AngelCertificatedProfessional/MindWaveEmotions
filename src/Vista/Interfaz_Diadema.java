@@ -245,12 +245,16 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         int contador = 0;
         int contadorFinal = 0;
         String lado = "derecho";
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 3");
-        Thread.sleep(3000);
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 2");
-        Thread.sleep(1500);
-        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " en 1");
-        Thread.sleep(1500);
+        for (int k = 10; k > 0; k--) {
+            if (k > 4) {
+                puntoEsperaLbl.setText("Espera!!!!");
+            } else {
+                puntoEsperaLbl.setText(".");
+            }
+            ladoLbl.setText("Piensa en mover el punto al lado: "
+                    + lado + " en " + k);
+            Thread.sleep(1500);
+        }
         try {
             while (clienteTCP.isDataAvailable()) {
                 ladoLbl.setText("Piensa en mover la laptop al lado: " + lado + " Ya:");
@@ -293,26 +297,27 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             eegControl.Registrar(listaEeg);
                             contador = 0;
                             contadorFinal++;
+                            listaEeg = null;
                             if (lado.equals("derecho")) {
                                 lado = "izquierdo";
                             } else {
                                 lado = "derecho";
                             }
-                            puntoEsperaLbl.setText("Espera!!!!");
-                            ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + " en 3");
-                            Thread.sleep(3000);
-                            puntoEsperaLbl.setText(".");
-                            ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + " en 2");
-                            Thread.sleep(1500);
-                            ladoLbl.setText("Piensa en mover el punto al lado: "
-                                    + lado + " en 1");
-                            Thread.sleep(1500);
+                            for (int k = 10; k > 0; k--) {
+                                if (k > 4) {
+                                    puntoEsperaLbl.setText("Espera!!!!");
+                                } else {
+                                    puntoEsperaLbl.setText(".");
+                                }
+                                ladoLbl.setText("Piensa en mover el punto al lado: "
+                                        + lado + " en " + k);
+                                Thread.sleep(1500);
+                            }
                         }
-                        if (contadorFinal == 20) {
+                        if (contadorFinal == 10) {
                             JOptionPane.showMessageDialog(this, "Gracias por tu ayuda, contigo haremos un futuro mejor");
                             this.dispose();
+                            System.exit(0);
                         }
                     } else {
                         ladoLbl.setText("Espera unos minutos :)");
