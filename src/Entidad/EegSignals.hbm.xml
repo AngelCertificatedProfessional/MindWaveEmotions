@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 16, 2016 9:23:31 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Feb 17, 2016 10:56:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Entidad.EegSignals" table="eeg_signals" catalog="eeg" optimistic-lock="version">
         <id name="idEegSignals" type="int">
-            <column name="idEeg_Signals" />
+            <column name="idEegSignals" />
             <generator class="assigned" />
         </id>
         <property name="nombrePersona" type="string">
