@@ -20,11 +20,11 @@ public class EegSignalsDAO {
      * Metodo para el guardado y actualizacion de una entidad
      * @param t Objeto a gurdar o actualizar
      */
-    public static void saveOrUpdate(EegSignals egg) {
+    public static void save(EegSignals egg) {
         try{
             HibernateUtil.openSession();
             HibernateUtil.beginTransaction();
-            HibernateUtil.getSession().saveOrUpdate(egg);
+            HibernateUtil.getSession().save(egg);
             HibernateUtil.commitTransaction();
             System.out.println("Guardado exitoso");
         }catch(HibernateException e){
