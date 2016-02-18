@@ -59,7 +59,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         concentracionLbl = new javax.swing.JLabel();
         relajacionLbl = new javax.swing.JLabel();
         ladoLbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        puntoEsperaLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,8 +90,8 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         ladoLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ladoLbl.setText("Piensa en el lado:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 80)); // NOI18N
-        jLabel2.setText(".");
+        puntoEsperaLbl.setFont(new java.awt.Font("Tahoma", 0, 80)); // NOI18N
+        puntoEsperaLbl.setText(".");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +110,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                                     .addComponent(concentracionLbl)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(110, 110, 110)
-                                        .addComponent(jLabel2)))
+                                        .addComponent(puntoEsperaLbl)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(highGammaLbl)
@@ -163,7 +163,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             .addComponent(highGammaLbl)
                             .addComponent(highAlphaLbl)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(puntoEsperaLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(concentracionLbl)
                         .addGap(83, 83, 83)
@@ -227,11 +227,11 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel highBetaLbl;
     private javax.swing.JLabel highGammaLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel ladoLbl;
     private javax.swing.JLabel lowAlphaLbl;
     private javax.swing.JLabel lowBetaLbl;
     private javax.swing.JLabel lowGammaLbl;
+    private javax.swing.JLabel puntoEsperaLbl;
     private javax.swing.JLabel relajacionLbl;
     private javax.swing.JLabel thetaLbl;
     // End of variables declaration//GEN-END:variables
@@ -254,15 +254,15 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         int contador = 0;
         int contadorFinal = 0;
         String lado = "derecho";
-        ladoLbl.setText("Piensa en mover el punto al lado: "+lado + "en 3");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 3");
         Thread.sleep(3000);
-        ladoLbl.setText("Piensa en mover el punto al lado: "+ lado + "en 2");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 2");
         Thread.sleep(1500);
-        ladoLbl.setText("Piensa en mover el punto al lado: "+ lado + "en 1");
+        ladoLbl.setText("Piensa en mover el punto al lado: " + lado + "en 1");
         Thread.sleep(1500);
         try {
             while (clienteTCP.isDataAvailable()) {
-                ladoLbl.setText("Piensa en mover la laptop al lado: "+ lado + " Ya:");
+                ladoLbl.setText("Piensa en mover la laptop al lado: " + lado + " Ya:");
                 EegSignals eeg = new EegSignals();
                 String clientData = clienteTCP.getData();
                 JSONObject json = new JSONObject(clientData);
@@ -301,29 +301,23 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                         if (contador == 15) {
                             eegControl.Registrar(listaEeg);
                             contador = 0;
+                            contadorFinal++;
                             if (lado.equals("derecho")) {
                                 lado = "izquierdo";
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 3");
-                                Thread.sleep(3000);
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 2");
-                                Thread.sleep(1500);
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 1");
-                                Thread.sleep(1500);
                             } else {
                                 lado = "derecho";
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 3");
-                                Thread.sleep(3000);
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 2");
-                                Thread.sleep(1500);
-                                ladoLbl.setText("Piensa en mover el punto al lado: "
-                                        + lado + "en 1");
-                                Thread.sleep(1500);
                             }
+                            puntoEsperaLbl.setText("Espera!!!!");
+                            ladoLbl.setText("Piensa en mover el punto al lado: "
+                                    + lado + "en 3");
+                            Thread.sleep(3000);
+                            puntoEsperaLbl.setText(".");
+                            ladoLbl.setText("Piensa en mover el punto al lado: "
+                                    + lado + "en 2");
+                            Thread.sleep(1500);
+                            ladoLbl.setText("Piensa en mover el punto al lado: "
+                                    + lado + "en 1");
+                            Thread.sleep(1500);
                         }
                         if (contadorFinal == 20) {
                             JOptionPane.showMessageDialog(this, "Gracias por tu ayuda, contigo haremos un futuro mejor");
