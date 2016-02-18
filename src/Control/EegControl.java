@@ -18,7 +18,7 @@ public class EegControl {
 
     public void Registrar(ArrayList<EegSignals> listaEeg) {
         for(int i =0;i<listaEeg.size();i++){
-            EegSignalsDAO.saveOrUpdate(listaEeg.get(i));
+            EegSignalsDAO.save(listaEeg.get(i));
         }
     }
     
