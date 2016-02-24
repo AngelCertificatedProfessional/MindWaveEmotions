@@ -16,6 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Conexion.ClienteTCP;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +27,7 @@ import org.json.JSONObject;
  * @author LiutsCertificatedProfessional Utilizando el parte del codigo de
  * ericblue
  */
-public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
+public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Interfaz_Diadema
@@ -32,7 +35,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     private ClienteTCP clienteTCP;
     private String personaAEvaluar;
 
-    public Interfaz_Diadema() {
+    public InterfazDiadema() {
         personaAEvaluar = JOptionPane.showInputDialog("Escriba su nombre");
         initComponents();
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -48,32 +51,93 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        deltaLbl = new javax.swing.JLabel();
-        thetaLbl = new javax.swing.JLabel();
-        lowAlphaLbl = new javax.swing.JLabel();
-        highAlphaLbl = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        principalPn = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        ladoLbl = new javax.swing.JLabel();
+        concentracionLbl = new javax.swing.JLabel();
+        relajacionLbl = new javax.swing.JLabel();
+        contadorLbl = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         lowBetaLbl = new javax.swing.JLabel();
+        deltaLbl = new javax.swing.JLabel();
         highBetaLbl = new javax.swing.JLabel();
         lowGammaLbl = new javax.swing.JLabel();
         highGammaLbl = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        concentracionLbl = new javax.swing.JLabel();
-        relajacionLbl = new javax.swing.JLabel();
-        ladoLbl = new javax.swing.JLabel();
-        puntoEsperaLbl = new javax.swing.JLabel();
-        contadorLbl = new javax.swing.JLabel();
+        thetaLbl = new javax.swing.JLabel();
+        lowAlphaLbl = new javax.swing.JLabel();
+        highAlphaLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        deltaLbl.setText("Delta: ");
+        jLabel1.setText("Datos Enviados por la MindWave: ");
 
-        thetaLbl.setText("Theta:");
+        ladoLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        ladoLbl.setText("Piensa en el lado:");
 
-        lowAlphaLbl.setText("LowAlpha:");
+        concentracionLbl.setText("Concentracion: ");
 
-        highAlphaLbl.setText("High Alpha: ");
+        relajacionLbl.setText("Relajacion:");
+
+        contadorLbl.setText("Contador:");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout principalPnLayout = new javax.swing.GroupLayout(principalPn);
+        principalPn.setLayout(principalPnLayout);
+        principalPnLayout.setHorizontalGroup(
+            principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalPnLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(contadorLbl)
+                .addGap(77, 77, 77))
+            .addGroup(principalPnLayout.createSequentialGroup()
+                .addGroup(principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(principalPnLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(ladoLbl))
+                    .addGroup(principalPnLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(principalPnLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(relajacionLbl)
+                            .addComponent(concentracionLbl)))
+                    .addGroup(principalPnLayout.createSequentialGroup()
+                        .addGap(390, 390, 390)
+                        .addComponent(jButton1)))
+                .addContainerGap(610, Short.MAX_VALUE))
+        );
+        principalPnLayout.setVerticalGroup(
+            principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(principalPnLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(contadorLbl)
+                .addGap(5, 5, 5)
+                .addComponent(ladoLbl)
+                .addGap(218, 218, 218)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addComponent(concentracionLbl)
+                .addGap(48, 48, 48)
+                .addComponent(relajacionLbl)
+                .addGap(44, 44, 44))
+        );
+
+        jTabbedPane1.addTab("General", principalPn);
 
         lowBetaLbl.setText("Low Beta:");
+
+        deltaLbl.setText("Delta: ");
 
         highBetaLbl.setText("High Beta:");
 
@@ -81,106 +145,74 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
 
         highGammaLbl.setText("High Gamma:");
 
-        jLabel1.setText("Datos Enviados por la MindWave: ");
+        thetaLbl.setText("Theta:");
 
-        concentracionLbl.setText("Concentracion: ");
+        lowAlphaLbl.setText("LowAlpha:");
 
-        relajacionLbl.setText("Relajacion:");
+        highAlphaLbl.setText("High Alpha: ");
 
-        ladoLbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        ladoLbl.setText("Piensa en el lado:");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(highBetaLbl)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lowBetaLbl)
+                            .addComponent(highGammaLbl)
+                            .addComponent(lowGammaLbl))
+                        .addGap(132, 132, 132)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lowAlphaLbl)
+                            .addComponent(highAlphaLbl)
+                            .addComponent(thetaLbl)
+                            .addComponent(deltaLbl))))
+                .addContainerGap(733, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lowBetaLbl)
+                    .addComponent(deltaLbl))
+                .addGap(30, 30, 30)
+                .addComponent(highBetaLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(thetaLbl)
+                .addGap(88, 88, 88)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lowGammaLbl)
+                    .addComponent(lowAlphaLbl))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(highGammaLbl)
+                    .addComponent(highAlphaLbl))
+                .addContainerGap(396, Short.MAX_VALUE))
+        );
 
-        puntoEsperaLbl.setFont(new java.awt.Font("Tahoma", 0, 80)); // NOI18N
-        puntoEsperaLbl.setText(".");
-
-        contadorLbl.setText("Contador:");
+        jTabbedPane1.addTab("Datos", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(highGammaLbl)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lowBetaLbl)
-                                        .addComponent(highBetaLbl))
-                                    .addComponent(lowGammaLbl))
-                                .addGap(116, 116, 116)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(highAlphaLbl)
-                                    .addComponent(lowAlphaLbl)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(deltaLbl)
-                                            .addComponent(thetaLbl)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ladoLbl)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(164, 164, 164)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(relajacionLbl)
-                                            .addComponent(concentracionLbl))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(103, 103, 103))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(contadorLbl)
-                        .addGap(93, 93, 93))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(492, 492, 492)
-                .addComponent(puntoEsperaLbl)
-                .addContainerGap(568, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(contadorLbl))
-                        .addGap(26, 26, 26)
-                        .addComponent(ladoLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(concentracionLbl)
-                        .addGap(106, 106, 106))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
-                        .addComponent(puntoEsperaLbl)
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lowBetaLbl)
-                            .addComponent(deltaLbl))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(highBetaLbl)
-                            .addComponent(thetaLbl))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lowGammaLbl)
-                            .addComponent(lowAlphaLbl))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(highGammaLbl)
-                            .addComponent(highAlphaLbl)
-                            .addComponent(relajacionLbl))))
-                .addGap(40, 40, 40))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,26 +231,27 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz_Diadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazDiadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz_Diadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazDiadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz_Diadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazDiadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz_Diadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazDiadema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Interfaz_Diadema interfaz = new Interfaz_Diadema();
+                InterfazDiadema interfaz = new InterfazDiadema();
                 boolean condicion = false;
                 while (!condicion) {
                     condicion = interfaz.crearConexion();
                 }
                 interfaz.setVisible(true);
-                if (condicion == true) {
+                if (condicion) {
                     (new Thread(interfaz)).start();
                 }
             }
@@ -233,12 +266,15 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel highAlphaLbl;
     private javax.swing.JLabel highBetaLbl;
     private javax.swing.JLabel highGammaLbl;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel ladoLbl;
     private javax.swing.JLabel lowAlphaLbl;
     private javax.swing.JLabel lowBetaLbl;
     private javax.swing.JLabel lowGammaLbl;
-    private javax.swing.JLabel puntoEsperaLbl;
+    private javax.swing.JPanel principalPn;
     private javax.swing.JLabel relajacionLbl;
     private javax.swing.JLabel thetaLbl;
     // End of variables declaration//GEN-END:variables
@@ -256,14 +292,21 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
     public void recibirDatos() throws InterruptedException {
         ArrayList<EegSignals> listaEeg = new ArrayList<EegSignals>();
         EegControl eegControl = new EegControl();
+        JLabel puntoLbl = new JLabel(".");
+        puntoLbl.setLocation(540, 315);
+        puntoLbl.setFont(new Font("Serif", Font.PLAIN, 100));
+        puntoLbl.setSize(400,203);
+        puntoLbl.setVisible(true);
+        principalPn.add(puntoLbl);
         int contador = 0;
         int contadorFinal = 0;
+
         String lado = "derecho";
         for (int k = 5; k > 0; k--) {
             if (k > 4) {
-                puntoEsperaLbl.setText("Espera!!!!");
+                puntoLbl.setText("Espera!!!!");
             } else {
-                puntoEsperaLbl.setText(".");
+                puntoLbl.setText(".");
             }
             ladoLbl.setText("Piensa en mover el punto al lado: "
                     + lado + " en " + k);
@@ -272,7 +315,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         try {
             while (clienteTCP.isDataAvailable()) {
 
-                ladoLbl.setText("Piensa en mover la laptop al lado: " + lado + " Ya:");
+                ladoLbl.setText("Piensa en mover el punto al lado: " + lado + " Ya:");
                 EegSignals eeg = new EegSignals();
                 String clientData = clienteTCP.getData();
                 JSONObject json = new JSONObject(clientData);
@@ -306,12 +349,21 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                         if (esense.getInt("attention") >= 30) {
                             listaEeg.add(eeg);
                             contador++;
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
+                        }
+                        if (esense.getInt("attention") >= 60 && lado.equals("derecho")) {
+                            puntoLbl.setLocation(puntoLbl.getLocation().x + 10, puntoLbl.getY());
+                            this.repaint();
+                            
+                            
+                        } else if (esense.getInt("attention") >= 60 && lado.equals("izquierdo")) {
+                            puntoLbl.setLocation(puntoLbl.getLocation().x - 10, puntoLbl.getY());
+                            this.repaint();
                         }
                     } else {
                         ladoLbl.setText("Espera unos minutos :)");
                     }
-                    if (contador == 15) {
+                    if (contador == 20) {
                         eegControl.Registrar(listaEeg);
                         contador = 0;
                         contadorFinal++;
@@ -324,11 +376,11 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                             lado = "derecho";
                         }
                         if (contadorFinal < 10) {
-                            for (int k = 10; k > 0; k--) {
+                            for (int k = 7; k > 0; k--) {
                                 if (k > 4) {
-                                    puntoEsperaLbl.setText("Espera!!!!");
+                                    puntoLbl.setText("Espera!!!!");
                                 } else {
-                                    puntoEsperaLbl.setText(".");
+                                    puntoLbl.setText(".");
                                 }
                                 ladoLbl.setText("Piensa en mover el punto al lado: "
                                         + lado + " en " + k);
@@ -343,7 +395,6 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
                     }
                 } else {
                     ladoLbl.setText("Espera unos minutos :)");
-                    System.out.println("No entro");
                 }
             }
         } catch (JSONException e1) {
@@ -355,7 +406,7 @@ public class Interfaz_Diadema extends javax.swing.JFrame implements Runnable {
         try {
             recibirDatos();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Interfaz_Diadema.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InterfazDiadema.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
