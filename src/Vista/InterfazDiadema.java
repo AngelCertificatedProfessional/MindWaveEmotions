@@ -58,7 +58,6 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
         concentracionLbl = new javax.swing.JLabel();
         relajacionLbl = new javax.swing.JLabel();
         contadorLbl = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lowBetaLbl = new javax.swing.JLabel();
         deltaLbl = new javax.swing.JLabel();
@@ -82,13 +81,6 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
 
         contadorLbl.setText("Contador:");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout principalPnLayout = new javax.swing.GroupLayout(principalPn);
         principalPn.setLayout(principalPnLayout);
         principalPnLayout.setHorizontalGroup(
@@ -109,11 +101,8 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
                         .addGap(36, 36, 36)
                         .addGroup(principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(relajacionLbl)
-                            .addComponent(concentracionLbl)))
-                    .addGroup(principalPnLayout.createSequentialGroup()
-                        .addGap(390, 390, 390)
-                        .addComponent(jButton1)))
-                .addContainerGap(610, Short.MAX_VALUE))
+                            .addComponent(concentracionLbl))))
+                .addContainerGap(865, Short.MAX_VALUE))
         );
         principalPnLayout.setVerticalGroup(
             principalPnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +113,7 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
                 .addComponent(contadorLbl)
                 .addGap(5, 5, 5)
                 .addComponent(ladoLbl)
-                .addGap(218, 218, 218)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 584, Short.MAX_VALUE)
                 .addComponent(concentracionLbl)
                 .addGap(48, 48, 48)
                 .addComponent(relajacionLbl)
@@ -210,10 +197,6 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -266,7 +249,6 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel highAlphaLbl;
     private javax.swing.JLabel highBetaLbl;
     private javax.swing.JLabel highGammaLbl;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -346,24 +328,24 @@ public class InterfazDiadema extends javax.swing.JFrame implements Runnable {
                         JSONObject esense = json.getJSONObject("eSense");
                         concentracionLbl.setText("Concentracion: " + Integer.toString(esense.getInt("attention")));
                         relajacionLbl.setText("Meditacion: " + Integer.toString(esense.getInt("meditation")));
-                        if (esense.getInt("attention") >= 30) {
+                        if (esense.getInt("attention") >= 70 && lado.equals("derecho")) {
+                            puntoLbl.setLocation(puntoLbl.getLocation().x + 15, puntoLbl.getY());
+                            this.repaint();
+                            listaEeg.add(eeg);
+                            contador++;
+                            Thread.sleep(500);
+                            
+                        } else if (esense.getInt("attention") >= 70 && lado.equals("izquierdo")) {
+                            puntoLbl.setLocation(puntoLbl.getLocation().x - 15, puntoLbl.getY());
+                            this.repaint();
                             listaEeg.add(eeg);
                             contador++;
                             Thread.sleep(500);
                         }
-                        if (esense.getInt("attention") >= 60 && lado.equals("derecho")) {
-                            puntoLbl.setLocation(puntoLbl.getLocation().x + 10, puntoLbl.getY());
-                            this.repaint();
-                            
-                            
-                        } else if (esense.getInt("attention") >= 60 && lado.equals("izquierdo")) {
-                            puntoLbl.setLocation(puntoLbl.getLocation().x - 10, puntoLbl.getY());
-                            this.repaint();
-                        }
                     } else {
                         ladoLbl.setText("Espera unos minutos :)");
                     }
-                    if (contador == 20) {
+                    if (contador == 5) {
                         eegControl.Registrar(listaEeg);
                         contador = 0;
                         contadorFinal++;
